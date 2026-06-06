@@ -7,7 +7,7 @@
   <h2>Model Details</h2>
   
 <br>-- Budget Predictor AI is a binary classification model that predicts whether an IDOOU app user has a budget of $300 or more, based on demographic features including age group, gender, and education level. Its output is used to personalize activity recommendations within the IDOOU mobile application.
-<br>-- The model is implemented as a Logistic Regression classifier, trained on a synthetic dataset of 300,000 IDOOU user experience study participants.
+<br>-- The model is implemented as a Logistic Regression classifier. The source data comes from a synthetic IDOOU user experience study of ~300,000 participants; after dropping rows with missing values and filtering to the three in-scope education levels (High School Grad, Bachelor's, Master's), 103,459 rows remained, of which 51,729 (the 50% training split) were used to fit the model.
 <br>-- Developed by the IDOOU engineering team for commercial deployment within the IDOOU app ecosystem, including hotel smart concierge integrations and autonomous vehicle dashboard deployments.
 <br>-- Known limitation: The model inherits strong bias from the training data. A bias mitigation strategy must be applied before deployment to avoid discriminatory outcomes for users with High School-level education.
 
@@ -35,11 +35,11 @@
 
   <h2> Training Data </h2>
   
-<br>-- The model was trained on a synthetic dataset of 300,000 IDOOU app users collected via a user experience study. Features include gender, age (binned: 18-24, 25-44, 45-65, 66-92), and education level (High School Grad, Bachelor's, Master's). The label is binary: budget >= $300 (1) or < $300 (0). Rows with missing values were dropped. Users who did not graduate high school or had "Other" education were excluded to focus the fairness analysis on the defined privileged/unprivileged groups. The dataset was split 50/30/20 (train/validate/test) using AIF360's BinaryLabelDataset.split; 50% (150,000 samples) was used for model training, with the validation set reserved for future threshold tuning and hyperparameter selection.
+<br>-- The source data is a synthetic IDOOU user experience study of ~300,000 participants. Features include gender, age (binned: 18-24, 25-44, 45-65, 66-92), and education level (High School Grad, Bachelor's, Master's). The label is binary: budget >= $300 (1) or < $300 (0). Rows with missing values were dropped, and users who did not graduate high school or had "Other" education were excluded to focus the fairness analysis on the defined privileged/unprivileged groups, leaving 103,459 rows. This filtered dataset was split 50/30/20 (train/validate/test) using AIF360's BinaryLabelDataset.split; the 50% training split (51,729 samples) was used for model training, with the validation set reserved for future threshold tuning and hyperparameter selection.
 
   <h2> Evaluation Data </h2>
   
-<br>-- The model was evaluated on a held-out test set comprising 20% of the full dataset (~60,000 samples after filtering), drawn from the 50/30/20 split. The test set reflects the same demographic distribution as the full dataset, including the class imbalance and education-level bias present in the training data. The validation split (30%) was not used for final evaluation and remains available for further model selection and fairness stratification.
+<br>-- The model was evaluated on a held-out test set comprising 20% of the filtered dataset (20,692 samples), drawn from the 50/30/20 split. The test set reflects the same demographic distribution as the filtered dataset, including the class imbalance and education-level bias present in the training data. The validation split (30%, 31,038 samples) was not used for final evaluation and remains available for further model selection and fairness stratification.
 
   <h2>Quantitative Analysis</h2>
   <br>-- Fairness metrics BEFORE bias mitigation (Logistic Regression baseline, threshold=0.2800):
