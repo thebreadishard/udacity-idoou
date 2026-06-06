@@ -25,7 +25,7 @@ IDOOU is a hypothetical mobile app that recommends local activities (parks, movi
    ```bash
    conda create -n idoou python=3.10
    conda activate idoou
-   conda install numpy scipy
+   conda install scipy
    pip install -r requirements.txt
    ```
 3. Open `AI Ethics Project -- STARTER.ipynb` in VS Code and select the `idoou` kernel.
