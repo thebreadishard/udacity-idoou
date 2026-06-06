@@ -1,9 +1,64 @@
 
 <html>
   <head>
+  <meta charset="utf-8">
+  <title>Model Card - IDOOU AI Budget Predicter</title>
+  <style>
+    body {
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #24292e;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 32px 64px 32px;
+      background-color: #ffffff;
+    }
+    h1 {
+      font-size: 2em;
+      font-weight: 600;
+      margin-bottom: 0.2em;
+      padding-bottom: 0.3em;
+    }
+    h2 {
+      font-size: 1.35em;
+      font-weight: 600;
+      color: #1b4965;
+      margin-top: 2em;
+      margin-bottom: 0.6em;
+      padding-bottom: 0.3em;
+      border-bottom: 2px solid #e1e4e8;
+    }
+    .subtitle {
+      text-align: center;
+      color: #6a737d;
+      margin-top: 0;
+      margin-bottom: 2.5em;
+      font-size: 1.05em;
+    }
+    .results-caption {
+      display: block;
+      text-align: center;
+      font-size: 1.15em;
+      font-weight: 600;
+      margin: 1.5em 0 0.5em 0;
+    }
+    .figures {
+      text-align: center;
+    }
+    .figures img {
+      display: block;
+      margin: 32px auto;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #e1e4e8;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+  </style>
   </head>
   <body>
   <center><h1>Model Card - IDOOU AI Budget Predicter</h1></center>
+  <p class="subtitle">Budget tier classifier for personalized activity recommendations</p>
   <h2>Model Details</h2>
   
 <br>-- Budget Predictor AI is a binary classification model that predicts whether an IDOOU app user has a budget of $300 or more, based on demographic features including age group, gender, and education level. Its output is used to personalize activity recommendations within the IDOOU mobile application.
@@ -60,16 +115,16 @@
 <br>-- The Theil Index measures overall inequality of benefit distribution. It was near 0 before mitigation (0.0020) and remains near 0 after (0.0031), confirming that at the aggregate level, benefit is distributed equitably.
 <br>-- The Average Odds Difference improved from -0.5126 to 0.0031, moving substantially closer to the ideal value of 0. This means the gap between true positive rates and false positive rates across education groups has been meaningfully reduced by the mitigation strategy.
 <br>-- The Statistical Parity Difference and Equal Opportunity Difference remain negative because High School graduates are genuinely rare in the high-budget label even in the ground truth — post-processing can adjust boundary decisions but cannot fully overcome a structural imbalance in the training distribution. Collecting more representative data and applying pre-processing reweighing earlier in the pipeline are the recommended next steps.
-  
-  <br/><br/><b>Results of the AI model after applying the bias mitigation strategy</b><br/>
-  
-  <center>
+
+  <span class="results-caption">Results of the AI model after applying the bias mitigation strategy</span>
+
+  <div class="figures">
   
   <img src="post_mitigation_confusion_matrix.png"><br/>
   <img src="shap_summary_plot_post_mitigation.png"><br/>
   <img src="cohort_analysis.png"><br/>
 
-  </center>
+  </div>
 
   <h2>Ethical Considerations</h2>
   
